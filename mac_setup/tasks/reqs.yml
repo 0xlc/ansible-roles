@@ -1,0 +1,16 @@
+---
+- name: reqs.yml | install reqs packages
+  homebrew:
+    update_homebrew: yes
+    name: "{{ reqs_packages }}"
+
+- name: reqs.yml | copy vimrc
+  copy:
+    src: vimrc
+    dest: ~/.vimrc
+
+- name: reqs.yml | easy_install pip
+  easy_install:
+    name: pip
+    state: latest
+  become: yes

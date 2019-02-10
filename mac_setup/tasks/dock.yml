@@ -1,0 +1,4 @@
+---
+- name: dock.yml | configure dock's apps
+  command: "dockutil --add /Applications/{{ item }}.app"
+  with_items: "{{ dock_apps }}"

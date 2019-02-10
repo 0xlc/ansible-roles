@@ -1,0 +1,17 @@
+---
+# tasks file for mac_setup
+- name: import reqs.yml
+  import_tasks: reqs.yml
+  tags: reqs
+
+- name: import zsh.yml
+  import_tasks: zsh.yml
+  tags: zsh
+
+- name: import task cask.yml
+  import_tasks: cask.yml
+  tags: cask
+
+- name: import task dock.yml
+  import_tasks: dock.yml
+  tags: dock

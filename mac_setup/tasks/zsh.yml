@@ -1,0 +1,40 @@
+---
+- name: zsh.yml | install oh-my-zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  register: ohmyzsh_result
+  changed_when: ohmyzsh_result is failed
+
+- name: zsh.yml | set up zsh
+  copy:
+    src: zshrc
+    dest: ~/.zshrc
+
+- name: zsh.yml | copy zsh theme
+  copy:
+    src: luca.zsh-theme
+    dest: /Users/luca/.oh-my-zsh/themes
+
+- name: zsh.yml | install fzf-zsh
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: "${ZSH}/custom/plugins/fzf-zsh"
+
+- name: zsh.yml | install base16-shell colors
+  git:
+    repo: https://github.com/chriskempson/base16-shell.git
+    dest: ~/.config/base16-shell
+    clone: yes
+    update: no
+
+- name: zsh.yml | copy custom base16-shell theme
+  copy:
+    src: base16-hopscotch.sh
+    dest: ~/.config/base16-shell/scripts
+    force: yes
+
+- name: zsh.yml | set defaults iTerm settings
+  copy:
+    src: com.googlecode.iterm2.plist
+    dest: ~/Library/Preferences/com.googlecode.iterm2.plist
+    force: yes
+  tags: iterm
